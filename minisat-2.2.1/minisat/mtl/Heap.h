@@ -31,7 +31,9 @@ namespace Minisat {
 
 template<class Comp>
 class Heap {
+  public:
     Comp     lt;       // The heap is a minimum-heap with respect to this comparator
+  private:
     vec<int> heap;     // Heap of integers
     vec<int> indices;  // Each integers position (index) in the Heap
 

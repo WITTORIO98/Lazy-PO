@@ -139,6 +139,12 @@ public:
     int       learntsize_adjust_start_confl;
     double    learntsize_adjust_inc;
 
+    int       important_var_group;
+    void      set_important_var_group(int limit) { 
+        important_var_group = limit; 
+        order_heap.lt.important_var_group = limit; 
+    }
+
     // Statistics: (read-only member variable)
     //
     uint64_t solves, starts, decisions, rnd_decisions, propagations, conflicts;
@@ -168,8 +174,14 @@ protected:
 
     struct VarOrderLt {
         const vec<double>&  activity;
-        bool operator () (Var x, Var y) const { return activity[x] > activity[y]; }
-        VarOrderLt(const vec<double>&  act) : activity(act) { }
+        int important_var_group;
+        bool operator () (Var x, Var y) const { 
+            bool x_imp = x < important_var_group;
+            bool y_imp = y < important_var_group;
+            if (x_imp != y_imp) return x_imp;
+            return activity[x] > activity[y]; 
+        }
+        VarOrderLt(const vec<double>&  act, int limit = 0) : activity(act), important_var_group(limit) { }
     };
 
     // Solver state:

@@ -87,7 +87,8 @@ Solver::Solver() :
   , qhead              (0)
   , simpDB_assigns     (-1)
   , simpDB_props       (0)
-  , order_heap         (VarOrderLt(activity))
+  , important_var_group(0)
+  , order_heap         (VarOrderLt(activity, 0))
   , progress_estimate  (0)
   , remove_satisfied   (true)
 
