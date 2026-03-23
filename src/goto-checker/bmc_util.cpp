@@ -486,6 +486,7 @@ std::chrono::duration<double> prepare_property_decider(
       // Usare -> perché memory_model_solver è pointer
       memory_model_solver->save_raw_graph(oc_edge_table, oc_label_table, equation.cat);
       memory_model_solver->set_important_var_group(equation.priority_limit);
+      std::cout << "AAA " << equation.priority_limit << " info: memory_model_solver\n";
     }
   }
 
@@ -526,6 +527,7 @@ std::chrono::duration<double> prepare_property_decider(
     deagle_solver->save_raw_graph(
       oc_edge_table, oc_guard_map, oc_location_map, equation.oc_result_order);
     deagle_solver->set_important_var_group(equation.priority_limit);
+    std::cout << "AAA " << equation.priority_limit << " info: deagle_solver\n";
   }
   // __SZH_ADD_END__
 
