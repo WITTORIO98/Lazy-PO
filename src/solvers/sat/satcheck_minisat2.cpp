@@ -360,6 +360,13 @@ void satcheck_minisat2_baset<T>::set_assumptions(const bvt &bv)
   }
 }
 
+template <typename T>
+void satcheck_minisat2_baset<T>::set_important_var_group(int limit)
+{
+  if(solver)
+    solver->set_important_var_group(limit);
+}
+
 template class satcheck_minisat2_baset<Minisat::Solver>;
 template class satcheck_minisat2_baset<Minisat::SimpSolver>;
 template class satcheck_minisat2_baset<Minisat::ClosureSolver>;

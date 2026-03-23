@@ -72,9 +72,7 @@ public:
     time_limit_seconds=lim;
   }
 
-  void set_important_var_group(int limit) {
-    if(solver) solver->set_important_var_group(limit);
-  }
+  void set_important_var_group(int limit);
 
 protected:
   resultt do_prop_solve() override;
