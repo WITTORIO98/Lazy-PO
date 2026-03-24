@@ -571,6 +571,7 @@ void run_property_decider(
 
   auto const sat_solver_start = std::chrono::steady_clock::now();
 
+  std::cout << "CCC (bmc_util)\n";
   decision_proceduret::resultt dec_result = property_decider.solve();
 
   auto const sat_solver_stop = std::chrono::steady_clock::now();

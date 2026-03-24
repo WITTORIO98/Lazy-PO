@@ -775,6 +775,8 @@ lbool Solver::solve_()
     conflict.clear();
     if (!ok) return l_False;
 
+    std::cout << "BBB " << important_var_group << "\n";
+
     solves++;
 
     max_learnts               = nClauses() * learntsize_factor;

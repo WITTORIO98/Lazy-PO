@@ -28,6 +28,7 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 #include "../../minisat/core/SolverTypes.h"
 
 #include <string>
+#include <iostream>
 
 namespace Minisat {
 
@@ -368,12 +369,12 @@ inline bool     Solver::withinBudget() const {
 // FIXME: after the introduction of asynchronous interrruptions the solve-versions that return a
 // pure bool do not give a safe interface. Either interrupts must be possible to turn off here, or
 // all calls to solve must return an 'lbool'. I'm not yet sure which I prefer.
-inline bool     Solver::solve         ()                    { budgetOff(); assumptions.clear(); return solve_() == l_True; }
-inline bool     Solver::solve         (Lit p)               { budgetOff(); assumptions.clear(); assumptions.push(p); return solve_() == l_True; }
-inline bool     Solver::solve         (Lit p, Lit q)        { budgetOff(); assumptions.clear(); assumptions.push(p); assumptions.push(q); return solve_() == l_True; }
-inline bool     Solver::solve         (Lit p, Lit q, Lit r) { budgetOff(); assumptions.clear(); assumptions.push(p); assumptions.push(q); assumptions.push(r); return solve_() == l_True; }
-inline bool     Solver::solve         (const vec<Lit>& assumps){ budgetOff(); assumps.copyTo(assumptions); return solve_() == l_True; }
-inline lbool    Solver::solveLimited  (const vec<Lit>& assumps){ assumps.copyTo(assumptions); return solve_(); }
+inline bool     Solver::solve         ()                    { std::cout << "CCC (minisat solve no args)\n"; budgetOff(); assumptions.clear(); return solve_() == l_True; }
+inline bool     Solver::solve         (Lit p)               { std::cout << "CCC (minisat solve 1 arg)\n"; budgetOff(); assumptions.clear(); assumptions.push(p); return solve_() == l_True; }
+inline bool     Solver::solve         (Lit p, Lit q)        { std::cout << "CCC (minisat solve 2 args)\n"; budgetOff(); assumptions.clear(); assumptions.push(p); assumptions.push(q); return solve_() == l_True; }
+inline bool     Solver::solve         (Lit p, Lit q, Lit r) { std::cout << "CCC (minisat solve 3 args)\n"; budgetOff(); assumptions.clear(); assumptions.push(p); assumptions.push(q); assumptions.push(r); return solve_() == l_True; }
+inline bool     Solver::solve         (const vec<Lit>& assumps){ std::cout << "CCC (minisat solve assumps)\n"; budgetOff(); assumps.copyTo(assumptions); return solve_() == l_True; }
+inline lbool    Solver::solveLimited  (const vec<Lit>& assumps){ std::cout << "CCC (minisat solveLimited)\n"; assumps.copyTo(assumptions); return solve_(); }
 inline bool     Solver::okay          ()      const   { return ok; }
 
 inline void     Solver::toDimacs     (const char* file){ vec<Lit> as; toDimacs(file, as); }

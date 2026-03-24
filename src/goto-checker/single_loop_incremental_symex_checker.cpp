@@ -134,6 +134,7 @@ operator()(propertiest &properties)
         << property_decider.get_decision_procedure().decision_procedure_text()
         << messaget::eom;
 
+      std::cout << "CCC (symex_checker)\n";
       decision_proceduret::resultt dec_result = property_decider.solve();
 
       property_decider.update_properties_status_from_goals(
