@@ -14,6 +14,7 @@ Author: Daniel Kroening, kroening@kroening.com
 
 #include <util/message.h>
 #include <util/threeval.h>
+#include <cstdint>
 
 #include "literal.h"
 
