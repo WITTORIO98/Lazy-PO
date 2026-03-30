@@ -289,6 +289,29 @@ bvt boolbvt::convert_symbol(const exprt &expr)
   const irep_idt &identifier = expr.get(ID_identifier);
   CHECK_RETURN(!identifier.empty());
 
+  const std::string name = id2string(identifier);
+  if(priority_limit > 0 && name.find("cs_T") != std::string::npos)
+  {
+    if(!map.get_map_entry(identifier).has_value())
+    {
+      if(!initialized_priority)
+      {
+        reserved_priority_vars.reserve(priority_limit);
+        for(std::size_t i = 0; i < priority_limit; ++i)
+          reserved_priority_vars.push_back(prop.new_variable());
+        initialized_priority = true;
+      }
+      if(priority_counter + width <= reserved_priority_vars.size())
+      {
+        bvt priority_bv;
+        priority_bv.reserve(width);
+        for(std::size_t i = 0; i < width; ++i)
+          priority_bv.push_back(reserved_priority_vars[priority_counter++]);
+        map.set_literals(identifier, type, priority_bv);
+      }
+    }
+  }
+
   bvt bv = map.get_literals(identifier, type, width);
 
   INVARIANT_WITH_DIAGNOSTICS(

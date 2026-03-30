@@ -84,16 +84,8 @@ literalt prop_conv_solvert::get_literal(const irep_idt &identifier)
   literalt literal;
   const std::string name = identifier.c_str();
 
-  if(priority_limit > 0 && name.find("En_T") != std::string::npos && priority_counter < reserved_priority_vars.size())
-  {
-    literal = reserved_priority_vars[priority_counter++];
-    //std::cout << ">>> [PRIORITY] ID " << literal.var_no() << " assigned to: " << name << std::endl;
-  }
-  else
-  {
-    literal = prop.new_variable();
-    //std::cout << ">>> [NORMAL]   ID " << literal.var_no() << " assigned to: " << name << std::endl;
-  }
+  literal = prop.new_variable();
+  //std::cout << ">>> [NORMAL]   ID " << literal.var_no() << " assigned to: " << name << std::endl;
 
   prop.set_variable_name(literal, identifier);
 

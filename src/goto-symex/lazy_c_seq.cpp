@@ -1285,7 +1285,7 @@ symbol_exprt lazy_c_seqt::create_enabled_symbol(
       return enabled.symbol;
   }
 
-  global_priority_limit_n++;
+  //global_priority_limit_n++;
   irep_idt enabled_name = "En_T" + std::to_string(thread) + "_L" +
                           std::to_string(label) + "_R" + std::to_string(round);
   symbol_exprt enabled_symbol{enabled_name, bool_typet{}};
@@ -1303,6 +1303,9 @@ symbol_exprt lazy_c_seqt::create_cs_symbol(size_t thread, size_t round)
     if(cs.thread == thread && cs.round == round)
       return cs.symbol;
   }
+
+  global_priority_limit_n += n_bit[thread];
+
   irep_idt cs_name =
     "cs_T" + std::to_string(thread) + "_R" + std::to_string(round);
   symbol_exprt cs_symbol{cs_name, unsignedbv_typet{n_bit[thread]}};
