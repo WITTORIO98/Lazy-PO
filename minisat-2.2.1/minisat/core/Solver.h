@@ -32,6 +32,8 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 
 namespace Minisat {
 
+extern int opt_csboost;
+
 //=================================================================================================
 // Solver -- the main class:
 
@@ -179,7 +181,11 @@ protected:
         bool operator () (Var x, Var y) const { 
             bool x_imp = x < important_var_group;
             bool y_imp = y < important_var_group;
-            if (x_imp != y_imp) return x_imp;
+            if (x_imp != y_imp) {
+                if (x_imp) return activity[x] * opt_csboost > activity[y];
+                if (y_imp) return activity[x]               > activity[y] * opt_csboost;
+            }
+            //if (x_imp != y_imp) return x_imp;
             return activity[x] > activity[y]; 
         }
         VarOrderLt(const vec<double>&  act, int limit = 0) : activity(act), important_var_group(limit) { }

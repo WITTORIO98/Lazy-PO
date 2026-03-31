@@ -100,6 +100,7 @@ void parse_solver_options(const cmdlinet &cmdline, optionst &options);
 #define OPT_SOLVER                                                             \
   "(smt1)" /* rejected, will eventually disappear */                           \
   "(minisat)"                                                                     \
+  "(csboost):"                                                                    \
   "(smt2)"                                                                     \
   "(fpa)"                                                                      \
   "(cvc3)"                                                                     \

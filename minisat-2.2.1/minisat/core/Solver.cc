@@ -25,6 +25,10 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 
 using namespace Minisat;
 
+namespace Minisat {
+    int opt_csboost = 1;
+}
+
 //=================================================================================================
 // Options:
 

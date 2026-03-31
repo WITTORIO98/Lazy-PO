@@ -133,8 +133,13 @@ void solver_factoryt::solvert::set_ofstream(std::unique_ptr<std::ofstream> p)
   ofstream_ptr = std::move(p);
 }
 
+namespace Minisat { extern int opt_csboost; }
+
 std::unique_ptr<solver_factoryt::solvert> solver_factoryt::get_solver()
 {
+  if(!options.get_option("csboost").empty())
+    Minisat::opt_csboost = std::stoi(options.get_option("csboost"));
+
   if(options.get_bool_option("dimacs"))
     return get_dimacs();
   if(options.is_set("external-sat-solver"))
@@ -552,6 +557,9 @@ static void parse_sat_options(const cmdlinet &cmdline, optionst &options)
 
   if(cmdline.isset("minisat"))
     options.set_option("minisat", true);
+
+  if(cmdline.isset("csboost"))
+    options.set_option("csboost", cmdline.get_value("csboost"));
 
   options.set_option("sat-preprocessor", !cmdline.isset("no-sat-preprocessor"));
 
