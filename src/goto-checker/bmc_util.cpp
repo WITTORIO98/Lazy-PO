@@ -438,7 +438,7 @@ std::chrono::duration<double> prepare_property_decider(
   auto solver_start = std::chrono::steady_clock::now();
 
   messaget log(ui_message_handler);
-  log.status() << "AAA [DEBUG] prepare_property_decider started, priority_limit=" << equation.priority_limit << messaget::eom;
+
   log.status()
     << "Passing problem to "
     << property_decider.get_decision_procedure().decision_procedure_text()
@@ -487,7 +487,7 @@ std::chrono::duration<double> prepare_property_decider(
       // Usare -> perché memory_model_solver è pointer
       memory_model_solver->save_raw_graph(oc_edge_table, oc_label_table, equation.cat);
       memory_model_solver->set_important_var_group(equation.priority_limit);
-      log.status() << "AAA " << equation.priority_limit << " info: memory_model_solver" << messaget::eom;
+
     }
   }
 
@@ -528,19 +528,19 @@ std::chrono::duration<double> prepare_property_decider(
     deagle_solver->save_raw_graph(
       oc_edge_table, oc_guard_map, oc_location_map, equation.oc_result_order);
     deagle_solver->set_important_var_group(equation.priority_limit);
-    log.status() << "AAA " << equation.priority_limit << " info: deagle_solver" << messaget::eom;
+
   }
 
   // minisat solver (se presente con opzione --minisat)
   if(auto *minisat_simp = dynamic_cast<satcheck_minisat_simplifiert *>(&prop_solver))
   {
     minisat_simp->set_important_var_group(equation.priority_limit);
-    log.status() << "AAA " << equation.priority_limit << " info: minisat (simplifier)" << messaget::eom;
+
   }
   else if(auto *minisat_no_simp = dynamic_cast<satcheck_minisat_no_simplifiert *>(&prop_solver))
   {
     minisat_no_simp->set_important_var_group(equation.priority_limit);
-    log.status() << "AAA " << equation.priority_limit << " info: minisat (no_simplifier)" << messaget::eom;
+
   }
   // __SZH_ADD_END__
 
@@ -571,7 +571,7 @@ void run_property_decider(
 
   auto const sat_solver_start = std::chrono::steady_clock::now();
 
-  std::cout << "CCC (bmc_util)\n";
+
   decision_proceduret::resultt dec_result = property_decider.solve();
 
   auto const sat_solver_stop = std::chrono::steady_clock::now();

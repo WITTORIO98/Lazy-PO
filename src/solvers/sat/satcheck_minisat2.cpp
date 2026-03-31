@@ -251,7 +251,7 @@ propt::resultt satcheck_minisat2_baset<T>::do_prop_solve()
         alarm(time_limit_seconds);
     }
 
-    std::cout << "BBB linux chiamata a solve\n";
+
     lbool solver_result = solver->solveLimited(solver_assumptions);
 
     if(old_handler != SIG_ERR)
@@ -269,7 +269,7 @@ propt::resultt satcheck_minisat2_baset<T>::do_prop_solve()
                     << messaget::eom;
     }
 
-    std::cout << "BBB win chiamata a solve\n";
+
     lbool solver_result = solver->solve(solver_assumptions) ? l_True : l_False;
 
 #endif
