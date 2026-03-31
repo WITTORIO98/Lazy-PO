@@ -245,6 +245,7 @@ lbool ICDSolver::solve_()
     while (status == l_Undef){
         double rest_base = luby_restart ? luby(restart_inc, curr_restarts) : pow(restart_inc, curr_restarts);
         status = search(rest_base * restart_first);
+        std::cout << "ZZZ total var=  " << nVars() << std::endl;
         if (!withinBudget()) break;
         curr_restarts++;
     }
