@@ -506,7 +506,7 @@ bool SimpSolver::eliminateVar(Var v)
     // Delete and store old clauses:
 
     // __SZH_ADD_BEGIN__
-    //std::cout << "var " << v << " is eliminated\n";
+    std::cout << "var " << v << " is eliminated\n";
     // __SZH_ADD_END__
 
     eliminated[v] = true;
@@ -553,7 +553,7 @@ bool SimpSolver::substitute(Var v, Lit x)
     if (!ok) return false;
 
     // __SZH_ADD_BEGIN__
-    //std::cout << "var " << v << " is substituted\n";
+    std::cout << "var " << v << " is substituted\n";
     // __SZH_ADD_END__
 
     eliminated[v] = true;
