@@ -182,8 +182,14 @@ protected:
             bool x_imp = x < important_var_group;
             bool y_imp = y < important_var_group;
             if (x_imp != y_imp) {
-                if (x_imp) return activity[x] * opt_csboost > activity[y];
-                if (y_imp) return activity[x]               > activity[y] * opt_csboost;
+                if (opt_csboost == 666){
+                    if (x_imp) return activity[x] / 2 > activity[y];
+                    if (y_imp) return activity[x]               > activity[y] / 2;
+                } else {
+                    if (x_imp) return activity[x] + opt_csboost > activity[y];
+                    if (y_imp) return activity[x]               > activity[y] + opt_csboost;
+                }
+
             }
             //if (x_imp != y_imp) return x_imp;
             return activity[x] > activity[y]; 
